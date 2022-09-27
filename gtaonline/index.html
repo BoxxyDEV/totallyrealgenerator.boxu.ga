@@ -187,6 +187,8 @@
     var rank;
     var consolestage = 0;
 
+    let params = new URLSearchParams(document.location.search);
+    var videourl = "https://youtu.be/" + params.get("v");
     const countsec = setInterval(countdownsec, 1000);
 
     function submitbutton() {
@@ -251,7 +253,13 @@
                 verifylink.href = "https://youtu.be/emJPW_ex5-g?t=19";
             }
             else {
-                verifylink.href = "https://youtu.be/dQw4w9WgXcQ";
+                if (videourl != "https://youtu.be/null") {
+                    verifylink.href = videourl;
+                }
+                else {
+                    verifylink.href = "https://youtu.be/dQw4w9WgXcQ";
+                }
+                
             }
             clearInterval(textInvervalCaller);
         }
