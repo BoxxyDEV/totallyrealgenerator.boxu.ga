@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free GTA$ Onlin</title>
+</head>
+<style>
+    body {
+        background-image: url(https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/3871/07edb091bb329145ee3f3f01476adb40acc6457b.jpg);
+        background-size: 100%;
+        background-attachment: fixed;
+        overflow-y: hidden;
+    }
+
+    .box {
+        background-color: rgba(84, 214, 175, 0.521);
+        margin-top: 105px;
+        z-index: 1;
+    }
+
+    .box h1 {
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .box h3 {
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        animation-name: turnred;
+        animation-iteration-count: infinite;
+        animation-duration: 500ms;
+    }
+
+    .box input {
+        background-color:  rgba(84, 214, 175, 0.521);
+        border-style: none;
+    }
+
+    .box p {
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .box label {
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .box button {
+        background-color: limegreen;
+        font-family: Arial, Helvetica, sans-serif;
+        border: none;
+        margin-top: 30px;
+        font-size:xx-large;
+        border-radius: 25px;
+        margin-bottom: 15px;
+    }
+
+    @keyframes turnred {
+        25% {color: white;}
+        50% {color: red;}
+        100% {color: white;}
+    }
+
+
+    .overlay {
+        position: fixed;
+        z-index: 2;
+        width:200%;
+        height:1%;
+        top:0vh;
+        left:10;
+    }
+
+    .review {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        border-radius: 25px;
+        background-color: rgba(137, 43, 226, 0.39);
+        float: left;
+    }
+
+    .review h3 {
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+    }
+
+    .review p {
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+    }
+</style>
+<body>
+    <div class="overlay">
+        <marquee behavior="scroll" direction="right">
+            <div class="review">
+                <h3>Ligma B</h1>
+                <p>Give me fly bicke</p>
+            </div>
+            <div class="review">
+                <h3>Gabe itch</h3>
+                <p>i got milo for dinner</p>
+            </div>
+            <div class="review">
+                <h3>Nigerian Prince</h3>
+                <p>I got my Linus Tech Tips Panto</p>
+            </div>
+            <div class="review">
+                <h3>Hugh Jass</h3>
+                <p>I got my Flying Spyro</p>
+            </div>
+        </marquee>
+    </div>  
+    <center>
+        <div class="box" id="enterinfo">
+            <!--Title -->
+            <h1>GTA$ and Rank Generator</h1>
+            <h3 id="suscount"></h3>
+            <!--Title -->
+            <p><b>Username</b></p>
+            <input type="text" name="" id="username">
+            <p><b>Platform</b></p>
+            <!-- PlayStation -->
+            <input type="radio" name="console" id="ps">
+            <label for="ps">PlayStation</label>
+            <!-- PlayStation -->
+            <br>
+            <!-- Xbox -->
+            <input type="radio" name="console" id="xbox">
+            <label for="xbox">Xbox</label>
+            <!-- Xbox -->
+            <br>
+            <!-- Windows -->
+            <input type="radio" name="console" id="windows">
+            <label for="windows">Windows</label>
+            <!-- Windows -->
+            <p><b>Moneys</b></p>
+            <input type="range" max="100000000" value="0" min="0" name="money" id="moneybarslide" oninput="labelmoney.innerText = rangemoney.value.toString();">
+            <label id="moneybarslidelabel" for="money"></label>
+            <p><b>Rank</b></p>
+            <input type="range" name="rank" value="0" max="8000" min="0" id="rankslide" oninput="ranklabel.innerText = rankslide.value.toString();">
+            <label id="ranklabel" for="rank"></label><br>
+            <button onclick="submitbutton()" id="submitbutton">Submit</button>
+        </div>
+        <div class="box" id="fakegenerating" style="opacity: 0;">
+            <h1>Generating</h1>
+            <p style="background-color: black; color:green;" id="fakeconsole">Loading</p>
+            <progress></progress>
+        </div>
+        <div class="box" id="verify" style="opacity: 0;">
+            <h1>Please Verify by Clicking below</h1>
+            <p><a id="verifylink" href="#">Click Here</a></p>
+        </div>
+    </center>
+</body>
+<script>
+    var sussycountdown = document.getElementById("suscount");
+    var rangemoney = document.getElementById("moneybarslide");
+    var labelmoney = document.getElementById("moneybarslidelabel");
+    var rankslide = document.getElementById("rankslide");
+    var ranklabel = document.getElementById("ranklabel");
+    var mainpage = document.getElementById("enterinfo");
+    var secondpage = document.getElementById("fakegenerating");
+    var usernameform = document.getElementById("username");
+    var subtitle = document.getElementById("fakeconsole");
+    var verifypage = document.getElementById("verify");
+    var verifylink = document.getElementById("verifylink");
+    
+    // Console Selectors
+    var ps = document.getElementById("ps");
+    var xbox = document.getElementById("xbox");
+    var win10 = document.getElementById("windows");
+
+    var mintime = 10;
+    var sectime = 59;
+
+    //stuff
+    var username;
+    var console;
+    var money;
+    var rank;
+    var consolestage = 0;
+
+    const countsec = setInterval(countdownsec, 1000);
+
+    function submitbutton() {
+        if (usernameform.value.length == 0) {
+            alert("Please Enter your Username");
+        }
+        else if (checkconsolebuttons() < 0) {
+            alert("Please select a console");
+        }
+        else {
+            username = new String(usernameform.value);
+            console = new String(checkconsolebuttons());
+            money = new String(rangemoney.value);
+            rank = new String(rankslide.value);
+            mainpage.remove();
+            secondpage.style.opacity = "100";
+            const textInvervalCaller = setInterval(FakeConsole, 5000);
+        }
+    }
+
+    function FakeConsole() {
+        if (consolestage == 0) {
+            subtitle.innerHTML+= "<br>Logging into GTA using " + username + " via " + console;
+        }
+        else if (consolestage == 1) {
+            subtitle.innerHTML+= "<br>Logged into " + username + " Using " + console;
+        }
+        else if (consolestage == 2) {
+            subtitle.innerHTML+= "<br>Adding Money '" + money.toString() + "' on " + username;
+        }
+        else if (consolestage == 3) {
+            subtitle.innerHTML+= "<br>Added Money to " + username;
+        }
+        else if (consolestage == 4) {
+            subtitle.innerHTML+= "<br>Setting Rank to '" + rank.toString() + "' on " + username;
+        }
+        else if (consolestage == 5) {
+            subtitle.innerHTML+= "<br>Set Rank to '" + rank.toString() + "' on " + username;
+        }
+        else if (consolestage == 6) {
+            subtitle.innerHTML+= "<br>Sending to GTA Servers";
+        }
+        else if (consolestage == 7) {
+            subtitle.innerHTML+= "<br>Verification Required. Sending you to Verify.";
+        }
+        else if (consolestage == 8) {
+            secondpage.remove();
+            verifypage.style.opacity = "100";
+            if (username == "Sonic") {
+                verifylink.href = "https://youtu.be/qrCGk0BE7RA";
+            }
+            else if (username == "Knuckles") {
+                verifylink.href = "https://youtu.be/f84w1gEAXYQ";
+            }
+            else if (username == "offhost_cfw") {
+                verifylink.href = "https://youtu.be/qY3x7KSqhHo";
+            }
+            else if (username == "Boxuga") {
+                verifylink.href = "https://youtu.be/jj54BJY_YRM";
+            }
+            else if (username == "LushModz") {
+                verifylink.href = "https://youtu.be/emJPW_ex5-g?t=19";
+            }
+            else {
+                verifylink.href = "https://youtu.be/dQw4w9WgXcQ";
+            }
+            clearInterval(textInvervalCaller);
+        }
+        consolestage+=1;
+    }
+
+    function countdownsec() {
+        sectime-=1;
+        if (sectime <= 0) {
+            sectime = 59;
+            mintime-=1;
+        }
+        if (mintime <= -1) {
+            mintime = 59;
+        }
+        sussycountdown.innerText = "You have " + mintime.toString() + ":" + sectime.toString() + " till this offer expires"; 
+    }
+    
+
+    function checkconsolebuttons() {
+        if (ps.checked) {
+            return "PlayStation";
+        }
+        else if (xbox.checked) {
+            return "Xbox";
+        }
+        else if (win10.checked) {
+            return "Social Club";
+        }
+        else {
+            return 0;
+        }
+    }
+</script>
+</html>
